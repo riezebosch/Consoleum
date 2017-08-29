@@ -3,6 +3,7 @@
     <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="InputSimulator" Version="1.0.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="PInvoke.Kernel32" Version="0.5.97" />
     <PackageReference Include="xunit" Version="2.2.0" />
