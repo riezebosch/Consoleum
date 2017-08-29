@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using Xunit;
+using static PInvoke.Kernel32;
 
 namespace LettuceIsSoon.Tests
 {
@@ -8,7 +10,11 @@ namespace LettuceIsSoon.Tests
         [Fact]
         public void Test1()
         {
-
+            var proc = new Process();
+            proc.StartInfo.FileName = "LettuceIsSoon.Tests.ConsoleApp.exe";
+            proc.StartInfo.UseShellExecute = true; // must always be false with .NET Core
+            proc.Start();
+            proc.WaitForExit();
         }
     }
 }
