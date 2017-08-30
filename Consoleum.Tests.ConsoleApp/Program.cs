@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LettuceIsSoon.Tests.ConsoleApp
+namespace Consoleum.Tests.ConsoleApp
 {
     class Program
     {

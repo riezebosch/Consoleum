@@ -12,10 +12,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LettuceIsSoon\LettuceIsSoon.csproj" />
-    <ProjectReference Include="..\LettuceIsSoon.Tests.ConsoleApp\LettuceIsSoon.Tests.ConsoleApp.csproj" />
+    <ProjectReference Include="..\Consoleum\Consoleum.csproj" />
+    <ProjectReference Include="..\Consoleum.Tests.ConsoleApp\Consoleum.Tests.ConsoleApp.csproj" />
   </ItemGroup>
-  <PropertyGroup>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
 </Project>

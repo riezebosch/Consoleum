@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="InputSimulator" Version="1.0.4.0" />
+    <PackageReference Include="PInvoke.User32" Version="0.5.97" />
+  </ItemGroup>
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Authors>Manuel Riezebosch</Authors>
+    <!-- <Company>Contoso</Company> -->
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyTitle>Consoleum</AssemblyTitle>
+    <Description>Scrape the output of a console for UI testing!</Description>
+    <!-- <Copyright>Manuel Riezebosch 2017</Copyright> -->
+    <PackageReleaseNotes>Initial release, probably the last.</PackageReleaseNotes>
+    <PackageTags>ui testing;console</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/riezebosch/Consoleum.git</RepositoryUrl>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+</Project>
