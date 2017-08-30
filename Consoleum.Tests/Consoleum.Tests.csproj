@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <DebugType>Full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4.0" />

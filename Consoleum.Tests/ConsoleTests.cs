@@ -4,6 +4,7 @@ using WindowsInput.Native;
 using Xunit;
 using Shouldly;
 using System.Threading;
+using System;
 
 namespace Consoleum.Tests
 {
@@ -12,33 +13,14 @@ namespace Consoleum.Tests
         [Fact]
         public void Test1()
         {
-            var proc = StartApplication();
+            IConsoleDriver driver = new ConsoleDriver("Consoleum.Tests.ConsoleApp.exe");
+            driver.Start();
 
             Console.CopyConsoleOutputToClipboard();
             var result = Console.ReadContentFromClipboard();
 
             result.ShouldBe("Hello World!\r\n");
-            CloseApplication(proc);
-        }
-
-        private static void CloseApplication(Process proc)
-        {
-            var simulator = new InputSimulator();
-            simulator.Keyboard.KeyPress(VirtualKeyCode.VK_X);
-            
-            proc.WaitForExit();
-        }
-
-        private static Process StartApplication()
-        {
-            var proc = new Process();
-            proc.StartInfo.FileName = "Consoleum.Tests.ConsoleApp.exe";
-            proc.StartInfo.UseShellExecute = true;
-            proc.Start();
-
-            Thread.Sleep(100);
- 
-            return proc;
+            (driver as IDisposable)?.Dispose();
         }
     }
 }
