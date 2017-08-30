@@ -13,14 +13,13 @@ namespace Consoleum.Tests
         [Fact]
         public void CaptureContentFromConsoleTest()
         {
-            IConsoleDriver driver = new ConsoleDriver("Consoleum.Tests.ConsoleApp.exe");
-            driver.Start();
-
-            
-            var result = driver.Output.Capture();
-
-            result.ShouldBe("Hello World!\r\n");
-            (driver as IDisposable)?.Dispose();
+            using (var driver = new ConsoleDriver("Consoleum.Tests.ConsoleApp.exe"))
+            {
+                driver.Start();
+                
+                ClipboardHelper.CopyConsoleOutputToClipboard(driver.Keyboard);
+                ClipboardHelper.ReadContentFromClipboard().ShouldBe("Hello World!\r\n");
+            }
         }
     }
 }
