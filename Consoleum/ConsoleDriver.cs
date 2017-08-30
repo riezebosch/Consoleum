@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using WindowsInput;
 
 namespace Consoleum
 {
@@ -8,6 +9,10 @@ namespace Consoleum
     {
         private readonly Process proc;
         private bool started;
+        
+        public IKeyboardSimulator Keyboard { get; }
+
+        public ICaptureOutput Output { get; } 
 
         public ConsoleDriver(string file, string arguments = null)
         {
@@ -15,6 +20,9 @@ namespace Consoleum
             proc.StartInfo.FileName = file;
             proc.StartInfo.Arguments = arguments;
             proc.StartInfo.UseShellExecute = true;
+
+            Keyboard  = new InputSimulator().Keyboard;
+            Output = new CaptureOutputUsingCliboard(Keyboard);
         }
         
         public void Start()

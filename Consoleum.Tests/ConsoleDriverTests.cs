@@ -31,7 +31,6 @@ namespace Consoleum.Tests
 
             var before = Process.GetProcessesByName("Consoleum.Tests.ConsoleApp");
             driver.Dispose();
-            Thread.Sleep(200);
 
             var after = Process.GetProcessesByName("Consoleum.Tests.ConsoleApp");
             after.Length.ShouldBeLessThan(before.Length);

@@ -6,7 +6,7 @@ using WindowsInput.Native;
 
 namespace Consoleum
 {
-    public class Console
+    internal static class ClipboardHelper
     {
         public static string ReadContentFromClipboard()
         {
@@ -45,15 +45,14 @@ namespace Consoleum
             return result;
         }
 
-        public static void CopyConsoleOutputToClipboard()
+        public static void CopyConsoleOutputToClipboard(IKeyboardSimulator keyboard)
         {
-            var simulator = new InputSimulator();
-            simulator.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
-            simulator.Keyboard.KeyPress(VirtualKeyCode.VK_A);
-            simulator.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
-            simulator.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-
-            Thread.Sleep(200);
+            keyboard
+                .KeyDown(VirtualKeyCode.CONTROL)
+                .KeyPress(VirtualKeyCode.VK_A)
+                .KeyUp(VirtualKeyCode.CONTROL)
+                .KeyPress(VirtualKeyCode.RETURN)
+                .Sleep(200);
         }
     }
 }

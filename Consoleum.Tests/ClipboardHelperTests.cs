@@ -8,16 +8,16 @@ using System;
 
 namespace Consoleum.Tests
 {
-    public partial class ConsoleTests
+    public partial class ClipboardHelperTests
     {
         [Fact]
-        public void Test1()
+        public void CaptureContentFromConsoleTest()
         {
             IConsoleDriver driver = new ConsoleDriver("Consoleum.Tests.ConsoleApp.exe");
             driver.Start();
 
-            Console.CopyConsoleOutputToClipboard();
-            var result = Console.ReadContentFromClipboard();
+            
+            var result = driver.Output.Capture();
 
             result.ShouldBe("Hello World!\r\n");
             (driver as IDisposable)?.Dispose();
