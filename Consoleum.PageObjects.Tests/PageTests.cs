@@ -73,5 +73,11 @@ namespace Consoleum.PageObjects.Tests
 
             ex.Message.ShouldContain("Hello World!");
         }
+
+        [Fact]
+        public void PageCanStartOnDriverObject()
+        {
+            driver.StartWith<Main>();
+        }
     }
 }

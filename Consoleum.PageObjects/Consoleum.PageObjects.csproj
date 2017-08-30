@@ -1,13 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\Consoleum\Consoleum.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup>
     <Authors>Manuel Riezebosch</Authors>
     <!-- <Company>Contoso</Company> -->
@@ -15,11 +9,14 @@
     <AssemblyTitle>Consoleum.PageObjects</AssemblyTitle>
     <Description>Selenium for the Console!</Description>
     <!-- <Copyright>Manuel Riezebosch 2017</Copyright> -->
-    <PackageReleaseNotes>Initial release, probably the last.</PackageReleaseNotes>
+    <PackageReleaseNotes>Package dependency on Consoleum. Extension method for IConsoleDriver.</PackageReleaseNotes>
     <PackageTags>ui testing;console;selenium;page object design pattern</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/riezebosch/Consoleum.git</RepositoryUrl>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Consoleum" Version="0.0.2" />
+  </ItemGroup>
 </Project>

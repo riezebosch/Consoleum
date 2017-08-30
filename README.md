@@ -50,7 +50,7 @@ public void SomeTestMethod()
     {
         driver.Start();
 
-        var page = Page
+        var page = driver
             .StartWith<Main>(driver)
             .SomeActionOnCurrentPage()
             .SomeNavigationAction();
