@@ -1,3 +1,7 @@
+[![AppVeyor](https://img.shields.io/appveyor/ci/riezebosch/consoleum/master.svg)](https://ci.appveyor.com/project/riezebosch/consoleum?branch=master)
+[![NuGet Consoleum](https://img.shields.io/nuget/v/Consoleum.svg)](https://www.nuget.org/packages/Consoleum/)
+[![NuGet Consoleum.PageObjects](https://img.shields.io/nuget/v/Consoleum.PageObjects.svg)](https://www.nuget.org/packages/Consoleum.PageObjects/)
+
 ## Consoleum
 
 A [Selenium](http://www.seleniumhq.org/)-like solution for automating console applications.
