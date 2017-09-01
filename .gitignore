@@ -245,3 +245,5 @@ ModelManifest.xml
 .fake/
 
 .vscode/
+.test/
+.coverage/

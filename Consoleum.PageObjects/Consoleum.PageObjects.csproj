@@ -4,6 +4,7 @@
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <DebugType>PdbOnly</DebugType>
   </PropertyGroup>
   <PropertyGroup>
     <Authors>Manuel Riezebosch</Authors>
