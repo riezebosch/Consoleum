@@ -13,8 +13,9 @@ namespace Consoleum.Tests
             var data = Guid.NewGuid().ToString();
             using (var driver = new ConsoleDriver("Consoleum.Tests.ConsoleApp.exe", data))
             {
-                driver.Start();
                 driver
+                    .Start()
+                    .Sleep(2000)
                     .Output
                     .Capture()
                     .ShouldContain(data);
@@ -27,9 +28,7 @@ namespace Consoleum.Tests
             var data = Guid.NewGuid().ToString();
             using (var driver = new ConsoleDriver("notepad"))
             {
-                driver.Start();
-                
-                var ex = Should.Throw<CaptureOutputException>(() => driver.Output.Capture());
+                var ex = Should.Throw<CaptureOutputException>(() => driver.Start().Output.Capture());
                 ex.Message.ShouldContain("nonce");
             }
         }

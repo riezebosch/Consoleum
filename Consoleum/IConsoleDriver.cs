@@ -4,7 +4,7 @@ namespace Consoleum
 {
     public interface IConsoleDriver
     {
-         void Start();
+         IConsoleDriver Start();
          IKeyboardSimulator Keyboard { get; }
          ICaptureOutput Output { get; }
     }

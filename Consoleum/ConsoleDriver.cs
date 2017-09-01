@@ -25,10 +25,12 @@ namespace Consoleum
             Output = new CaptureOutputUsingCliboard(Keyboard);
         }
         
-        public void Start()
+        public IConsoleDriver Start()
         {
             started = proc.Start();
             Thread.Sleep(200);
+
+            return this;
         }
 
         public void Dispose()
