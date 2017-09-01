@@ -23,6 +23,6 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/riezebosch/Consoleum.git</RepositoryUrl>
-    <Version>0.0.2</Version>
+    <Version>0.0.1234</Version>
   </PropertyGroup>
 </Project>
