@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Consoleum.PageObjects.Tests.App
 {
@@ -16,6 +17,15 @@ namespace Consoleum.PageObjects.Tests.App
                     case ConsoleKey.D2:
                         Console.Clear();
                         Console.WriteLine("You're on the second page.");
+                        break;
+
+                    case ConsoleKey.D3:
+                        Console.Clear();
+                        System.Console.WriteLine("Waiting...");
+                        Thread.Sleep(2000);
+                        System.Console.WriteLine("Finally...");
+                        Thread.Sleep(2000);
+                        System.Console.WriteLine("Result=8");
                         break;
 
                     default:

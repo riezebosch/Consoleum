@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Consoleum.PageObjects
 {
@@ -10,31 +11,52 @@ namespace Consoleum.PageObjects
 
         protected bool ExistsInOutput(string pattern)
         {
-            return Regex.IsMatch(Driver.Output.Capture(), pattern);
+            for (int i = 0; i < 4; i++)
+            {
+                if (Regex.IsMatch(Driver.Output.Capture(), pattern))
+                {
+                    return true;
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                }
+            }
+
+            return false;
         }
 
         protected string FindInOutput(string pattern)
         {
-            string output = Driver.Output.Capture();
-            var match = Regex.Match(output, pattern);
-            if (!match.Success)
+            string output = null;
+            for (int i = 0; i < 4; i++)
             {
-                throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
+                output = Driver.Output.Capture();
+                var match = Regex.Match(output, pattern);
 
-{output}") { Output = output, Pattern = pattern };
+                if (match.Success)
+                {
+                    return match.Value;
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                }
             }
 
-            return match.Value;
+            throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
+
+{output}") { Output = output, Pattern = pattern };
         }
 
         public static TPage StartWith<TPage>(IConsoleDriver driver)
-            where TPage: Page, new()
+            where TPage : Page, new()
         {
             return new TPage { Driver = driver };
         }
 
         protected TPage NavigateTo<TPage>()
-            where TPage: Page, new()
+            where TPage : Page, new()
         {
             var next = new TPage { Driver = Driver };
             if (!next.IsOpen)
@@ -46,7 +68,7 @@ Capture of current screen:
                 
 {output}") { Output = output };
             }
-            
+
             return next;
         }
     }

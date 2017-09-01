@@ -33,5 +33,15 @@ namespace Consoleum.PageObjects.Tests.PageObjects
         {
             return NavigateTo<Second>();
         }
+
+        internal Slow TrySlow()
+        {
+            Driver
+                .Keyboard
+                .KeyPress(VirtualKeyCode.VK_3)
+                .Sleep(200);
+
+            return NavigateTo<Slow>();
+        }
     }
 }

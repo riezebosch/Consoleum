@@ -75,6 +75,24 @@ namespace Consoleum.PageObjects.Tests
         }
 
         [Fact]
+        public void ExistsInOutputDoesSomeRetriesBeforeFailure()
+        {
+            Page
+                .StartWith<Main>(driver)
+                .TrySlow()
+                .IsOpen.ShouldBeTrue();  
+        }
+
+                [Fact]
+        public void FindInOutputDoesSomeRetriesBeforeFailure()
+        {
+            Page
+                .StartWith<Main>(driver)
+                .TrySlow()
+                .Label.ShouldBe(8);
+        }
+
+        [Fact]
         public void PageCanStartOnDriverObject()
         {
             driver.StartWith<Main>();
