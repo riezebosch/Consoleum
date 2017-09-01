@@ -9,11 +9,17 @@
     <PackageReference Include="PInvoke.Kernel32" Version="0.5.97" />
     <PackageReference Include="PInvoke.User32" Version="0.5.97" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
+    <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Consoleum\Consoleum.csproj" />
     <ProjectReference Include="..\Consoleum.Tests.ConsoleApp\Consoleum.Tests.ConsoleApp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

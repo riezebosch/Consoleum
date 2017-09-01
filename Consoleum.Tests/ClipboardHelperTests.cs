@@ -5,21 +5,20 @@ using Xunit;
 using Shouldly;
 using System.Threading;
 using System;
+using PInvoke;
 
 namespace Consoleum.Tests
 {
     public partial class ClipboardHelperTests
     {
         [Fact]
-        public void CaptureContentFromConsoleTest()
+        public void CopyToClipboard()
         {
-            using (var driver = new ConsoleDriver("Consoleum.Tests.ConsoleApp.exe"))
-            {
-                driver.Start();
-                
-                ClipboardHelper.CopyConsoleOutputToClipboard(driver.Keyboard);
-                ClipboardHelper.ReadContentFromClipboard().ShouldBe("Hello World!\r\n");
-            }
+            var data = Guid.NewGuid().ToString();
+            
+            ClipboardHelper.SetData(data);
+
+            ClipboardHelper.GetData().ShouldBe(data);
         }
     }
 }

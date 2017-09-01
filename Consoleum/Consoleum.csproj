@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <DebugType>PdbOnly</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4.0" />
     <PackageReference Include="PInvoke.User32" Version="0.5.97" />
+    <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
   </ItemGroup>
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
