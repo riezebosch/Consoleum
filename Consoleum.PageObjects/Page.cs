@@ -11,24 +11,29 @@ namespace Consoleum.PageObjects
 
         protected bool ExistsInOutput(string pattern)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                if (Regex.IsMatch(Driver.Output.Capture(), pattern))
-                {
-                    return true;
-                }
-                else
-                {
-                    Thread.Sleep(1000);
-                }
-            }
+            var match = RepetitiveTryToGetMatch(pattern, out _);
 
-            return false;
+            return match?.Success ?? false;
         }
 
         protected string FindInOutput(string pattern)
         {
-            string output = null;
+            var match = RepetitiveTryToGetMatch(pattern, out var output);
+
+            if (match != null && match.Success)
+            {
+                return match.Value;
+            }
+
+
+            throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
+
+{output}") { Output = output, Pattern = pattern };
+        }
+
+        private Match RepetitiveTryToGetMatch(string pattern, out string output)
+        {
+            output = null;
             for (int i = 0; i < 4; i++)
             {
                 output = Driver.Output.Capture();
@@ -36,17 +41,14 @@ namespace Consoleum.PageObjects
 
                 if (match.Success)
                 {
-                    return match.Value;
+                    return match;
                 }
                 else
                 {
                     Thread.Sleep(1000);
                 }
             }
-
-            throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
-
-{output}") { Output = output, Pattern = pattern };
+            return null;
         }
 
         public static TPage StartWith<TPage>(IConsoleDriver driver)
