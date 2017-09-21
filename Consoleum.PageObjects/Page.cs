@@ -11,32 +11,46 @@ namespace Consoleum.PageObjects
 
         protected bool ExistsInOutput(string pattern)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                if (Regex.IsMatch(Driver.Output.Capture(), pattern))
-                {
-                    return true;
-                }
-                else
-                {
-                    Thread.Sleep(1000);
-                }
-            }
-
-            return false;
+            return RetryMultipleTimes(() => Regex.IsMatch(Driver.Output.Capture(), pattern), r => r);
         }
 
         protected string FindInOutput(string pattern)
         {
-            string output = null;
+            var result = RetryMultipleTimes(() =>
+            {
+                var output = Driver.Output.Capture();
+                var match = Regex.Match(output, pattern);
+                return new { match, output };
+
+            }, r => r.match.Success);
+
+            if (result.match.Success)
+            {
+                return result.match.Value;
+            }
+
+            throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
+
+{result.output}") { Output = result.output, Pattern = pattern };
+        }
+
+
+        /// <summary>
+        /// Retry <paramref name="tryMe"/> multiple times
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tryMe">try this</param>
+        /// <param name="isSuccess">is the result a success and stop?</param>
+        /// <returns>the last result of <paramref name="tryMe"/></returns>
+        private static T RetryMultipleTimes<T>(Func<T> tryMe, Func<T, bool> isSuccess)
+        {
+            T result = default(T);
             for (int i = 0; i < 4; i++)
             {
-                output = Driver.Output.Capture();
-                var match = Regex.Match(output, pattern);
-
-                if (match.Success)
+                result = tryMe();
+                if (isSuccess(result))
                 {
-                    return match.Value;
+                    return result;
                 }
                 else
                 {
@@ -44,9 +58,7 @@ namespace Consoleum.PageObjects
                 }
             }
 
-            throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
-
-{output}") { Output = output, Pattern = pattern };
+            return result;
         }
 
         public static TPage StartWith<TPage>(IConsoleDriver driver)
