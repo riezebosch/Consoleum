@@ -18,7 +18,7 @@
     <AssemblyTitle>Consoleum</AssemblyTitle>
     <Description>Selenium for the Console!</Description>
     <!-- <Copyright>Manuel Riezebosch 2017</Copyright> -->
-    <PackageReleaseNotes>WIN2012R2 fix (don't use shortcut for select all)</PackageReleaseNotes>
+    <PackageReleaseNotes>Refactor improvement.</PackageReleaseNotes>
     <PackageTags>ui testing;console;selenium</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
