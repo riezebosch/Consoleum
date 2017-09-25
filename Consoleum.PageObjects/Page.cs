@@ -11,44 +11,38 @@ namespace Consoleum.PageObjects
 
         protected bool ExistsInOutput(string pattern)
         {
-            var match = RepetitiveTryToGetMatch(pattern, out _);
-
-            return match?.Success ?? false;
+            return RetryCaptureMatch(pattern, out _).Success;
         }
 
         protected string FindInOutput(string pattern)
         {
-            var match = RepetitiveTryToGetMatch(pattern, out var output);
-
-            if (match != null && match.Success)
+            var match = RetryCaptureMatch(pattern, out var output);
+            if (!match.Success)
             {
-                return match.Value;
-            }
-
-
-            throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
+                throw new OutputNotFoundException($@"Pattern '{pattern}' not found in output:
 
 {output}") { Output = output, Pattern = pattern };
+            }
+
+            return match.Value;
         }
 
-        private Match RepetitiveTryToGetMatch(string pattern, out string output)
+        private Match RetryCaptureMatch(string pattern, out string output)
         {
-            output = null;
-            for (int i = 0; i < 4; i++)
+            var match = CaptureMatch(pattern, out output);
+            for (int i = 0; !match.Success && i < 4; i++)
             {
-                output = Driver.Output.Capture();
-                var match = Regex.Match(output, pattern);
-
-                if (match.Success)
-                {
-                    return match;
-                }
-                else
-                {
-                    Thread.Sleep(1000);
-                }
+                Thread.Sleep(1000);
+                match = CaptureMatch(pattern, out output);
             }
-            return null;
+
+            return match;
+        }
+
+        private Match CaptureMatch(string pattern, out string output)
+        {
+            output = Driver.Output.Capture();
+            return Regex.Match(output, pattern);
         }
 
         public static TPage StartWith<TPage>(IConsoleDriver driver)
