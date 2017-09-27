@@ -10,9 +10,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consoleum.PageObjects", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consoleum.PageObjects.Tests", "Consoleum.PageObjects.Tests\Consoleum.PageObjects.Tests.csproj", "{6B09AA63-89A8-4C78-8EB5-97FED473C250}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consoleum.PageObjects.Tests.App", "Consoleum.PageObjects.Tests.App\Consoleum.PageObjects.Tests.App.csproj", "{85792CD6-516F-4B76-915A-2D6D8F4AABBC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consoleum.Tests.ConsoleApp", "Consoleum.Tests.ConsoleApp\Consoleum.Tests.ConsoleApp.csproj", "{F3E5C968-5982-4E02-A029-E8EC79234284}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D79A1AF9-17FD-42DC-B776-93527BB502FA}"
+	ProjectSection(SolutionItems) = preProject
+		Run-OpenCover.ps1 = Run-OpenCover.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,18 +75,6 @@ Global
 		{6B09AA63-89A8-4C78-8EB5-97FED473C250}.Release|x64.Build.0 = Release|Any CPU
 		{6B09AA63-89A8-4C78-8EB5-97FED473C250}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B09AA63-89A8-4C78-8EB5-97FED473C250}.Release|x86.Build.0 = Release|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Debug|x64.Build.0 = Debug|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Debug|x86.Build.0 = Debug|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Release|x64.ActiveCfg = Release|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Release|x64.Build.0 = Release|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Release|x86.ActiveCfg = Release|Any CPU
-		{85792CD6-516F-4B76-915A-2D6D8F4AABBC}.Release|x86.Build.0 = Release|Any CPU
 		{F3E5C968-5982-4E02-A029-E8EC79234284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3E5C968-5982-4E02-A029-E8EC79234284}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E5C968-5982-4E02-A029-E8EC79234284}.Debug|x64.ActiveCfg = Debug|Any CPU

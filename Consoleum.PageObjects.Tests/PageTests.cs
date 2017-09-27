@@ -1,101 +1,182 @@
 using System;
-using Consoleum.PageObjects.Tests.PageObjects;
 using Xunit;
 using Shouldly;
+using NSubstitute;
+using WindowsInput;
+using System.Threading.Tasks;
 
 namespace Consoleum.PageObjects.Tests
 {
-    public class PageTests : IDisposable
+    public class PageTests
     {
-        private ConsoleDriver driver;
+        private ICaptureOutput capture;
+        private IConsoleDriver driver;
 
         public PageTests()
         {
-            driver = new ConsoleDriver("Consoleum.PageObjects.Tests.App.exe");
-            driver.Start();
-        }
+            capture = Substitute.For<ICaptureOutput>();
+            driver = Substitute.For<IConsoleDriver>();
+            driver
+                .Output
+                .Returns(capture);
 
-        public void Dispose()
-        {
-            driver.Dispose();
+            driver
+                .Keyboard
+                .Returns(Substitute.For<IKeyboardSimulator>());
         }
 
         [Fact]
         public void StartWithOpensPage()
         {
-            var page = Page.StartWith<Main>(driver);
-            page.IsOpen.ShouldBeTrue();
+            var page = Page.StartWith<PageWrapper>(driver);
+            page
+                .IsOpen
+                .ShouldBeTrue();
         }
 
         [Fact]
         public void StartWithSecondIsOpenFalse()
         {
-            var page = Page.StartWith<Second>(driver);
-            page.IsOpen.ShouldBeFalse();
+            var page = Page.StartWith<PageNotOpen>(driver);
+            page
+                .IsOpen
+                .ShouldBeFalse();
         }
 
         [Fact]
         public void NavigateFromStartPageToSecond()
         {
             Page
-                .StartWith<Main>(driver)
-                .Next()
+                .StartWith<PageWrapper>(driver)
+                .NavigateToDriver<PageWrapper>()
                 .IsOpen.ShouldBeTrue();
         }
 
         [Fact]
-        public void NavigateValidatesNewPage()
+        public void NavigateThrowsIfToIsNotOpen()
         {
-            var ex = Should.Throw<NavigationFailedException>(() => Page.StartWith<Main>(driver)
-                .NotNext());
+            var data = CreateUniqueData();
+            capture.Capture().Returns(data);
 
-            ex.Message.ShouldContain("Main");
-            ex.Message.ShouldContain("Second");
-            ex.Message.ShouldContain("Hello World!");
-            ex.Output.ShouldContain("Hello World!");
+            var ex = Should.Throw<NavigationFailedException>(() =>
+                Page
+                    .StartWith<PageWrapper>(driver)
+                    .NavigateToDriver<PageNotOpen>());
+
+            ex.Output.ShouldContain(data);
         }
 
         [Fact]
-        public void FindValueInOutput()
+        public void FindOnPageThrowsAfter4Retries()
         {
-            Page
-                .StartWith<Main>(driver)
-                .EnterUnknownCommand()
-                .WrongCommand.ShouldBe("X");
+            var data = CreateUniqueData();
+
+            Should.Throw<OutputNotFoundException>(() => driver.StartWith<PageWrapper>().FindInOutputDriver(data));
+            capture.Received(5).Capture();
         }
 
         [Fact]
-        public void FindValueInOutputFailsDetails()
+        public void ExistsOnPageFalseAfter4Retries()
         {
-            var ex = Should.Throw<OutputNotFoundException>(() => Page
-                .StartWith<Main>(driver)
-                .WrongCommand.ToString());
+            var data = CreateUniqueData();
 
-            ex.Message.ShouldContain("Hello World!");
+            driver.StartWith<PageWrapper>()
+                .ExistsInOutputDriver(data)
+                .ShouldBeFalse();
+
+            capture.Received(5).Capture();
         }
 
         [Fact]
-        public void ExistsInOutputDoesSomeRetriesBeforeFailure()
+        public void FindOnPageSucceedsAfter4thTry()
         {
-            Page
-                .StartWith<Main>(driver)
-                .TrySlow()
-                .IsOpen.ShouldBeTrue();  
-        }
+            var data = CreateUniqueData();
+            capture
+                .Capture()
+                .Returns("first", "second", "third", data);
 
-                [Fact]
-        public void FindInOutputDoesSomeRetriesBeforeFailure()
-        {
-            Page
-                .StartWith<Main>(driver)
-                .TrySlow()
-                .Label.ShouldBe(8);
+            driver
+                .StartWith<PageWrapper>()
+                .FindInOutputDriver(data)
+                .ShouldBe(data);
+
+            capture.Received(4).Capture();
         }
 
         [Fact]
-        public void PageCanStartOnDriverObject()
+        public void ExistsOnPageSucceedsAfter4thTry()
         {
-            driver.StartWith<Main>();
+            var data = CreateUniqueData();
+            capture
+                .Capture()
+                .Returns("first", "second", "third", data);
+
+            driver
+                .StartWith<PageWrapper>()
+                .ExistsInOutputDriver(data)
+                .ShouldBeTrue();
+
+            capture.Received(4).Capture();
+        }
+
+        [Fact]
+        public void FindOnPage()
+        {
+            var data = CreateUniqueData();
+            capture.Capture().Returns(data);
+
+            driver
+                .StartWith<PageWrapper>()
+                .FindInOutputDriver(data)
+                .ShouldBe(data);
+        }
+
+        [Fact]
+        public void FindOnPageWaitsAtLeast4Seconds()
+        {
+            var delayed = string.Empty;
+            capture.Capture().Returns(info => delayed);
+
+            var data = CreateUniqueData();
+            Task
+                .Delay(TimeSpan.FromSeconds(4))
+                .ContinueWith(t => delayed = data);
+
+            driver
+                .StartWith<PageWrapper>()
+                .FindInOutputDriver(data);
+        }
+
+        private static string CreateUniqueData()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+
+        class PageWrapper : Page
+        {
+            public override bool IsOpen => true;
+
+            public string FindInOutputDriver(string pattern)
+            {
+                return FindInOutput(pattern);
+            }
+
+            public T NavigateToDriver<T>()
+                where T: Page, new()
+            {
+                return NavigateTo<T>();
+            }
+
+            public bool ExistsInOutputDriver(string pattern)
+            {
+                return base.ExistsInOutput(pattern);
+            }
+        }
+
+        class PageNotOpen : Page
+        {
+            public override bool IsOpen => false;
         }
     }
 }
