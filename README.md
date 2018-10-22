@@ -18,7 +18,7 @@ Use the `IConsoleDriver` and `ConsoleDriver` to start the process and the provid
 
 ## Page Objects
 
-You can use this package without or use plain POCO's, but you might use the `Page` base class instead to make navigation a bit more straightforward.
+You can use this package without or use plain POCO's, but you might use the `Page` base class instead to make navigation a bit more straightforward. To use the `Page` class, you have to install Consoleum.PageObjects Nuget package.
 
 ```cs
 class Main : Page
