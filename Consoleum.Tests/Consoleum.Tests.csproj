@@ -8,7 +8,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
     <PackageReference Include="PInvoke.Kernel32" Version="0.5.97" />
-    <PackageReference Include="PInvoke.User32" Version="0.5.97" />
+    <PackageReference Include="PInvoke.User32" Version="0.5.184" />
     <PackageReference Include="ReportGenerator" Version="2.5.11" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
