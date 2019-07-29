@@ -7,7 +7,7 @@
     <PackageReference Include="InputSimulator" Version="1.0.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="OpenCover" Version="4.7.922" />
-    <PackageReference Include="PInvoke.Kernel32" Version="0.5.97" />
+    <PackageReference Include="PInvoke.Kernel32" Version="0.5.184" />
     <PackageReference Include="PInvoke.User32" Version="0.5.97" />
     <PackageReference Include="ReportGenerator" Version="4.2.11" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
