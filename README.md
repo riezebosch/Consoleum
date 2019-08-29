@@ -18,7 +18,23 @@ Use the `IConsoleDriver` and `ConsoleDriver` to start the process and the provid
 
 ## Page Objects
 
-You can use this package without or use plain POCO's, but you might use the `Page` base class instead to make navigation a bit more straightforward. To use the `Page` class, you have to install Consoleum.PageObjects Nuget package.
+You can use this package without or use plain POCO's, but you might want to use the `Page` base class from the [Consoleum.PageObjects](https://www.nuget.org/packages/Consoleum.PageObjects/) package instead.
+
+```cs
+public void SomeTestMethod()
+{
+    using (var driver = new ConsoleDriver("some-app.exe"))
+    {
+        driver.Start();
+
+        Page
+            .StartWith<Main>(driver)
+            .SomeActionOnCurrentPage()
+            .SomeNavigationAction()
+            .ShouldBeLoggedInByNow();
+    }
+}
+```
 
 ```cs
 class Main : Page
@@ -46,24 +62,9 @@ class Main : Page
     }
 }
 ```
-
-```cs
-public void SomeTestMethod()
-{
-    using (var driver = new ConsoleDriver("some-app.exe"))
-    {
-        driver.Start();
-
-        var page = driver
-            .StartWith<Main>(driver)
-            .SomeActionOnCurrentPage()
-            .SomeNavigationAction();
-    }
-}
-```
-
 Look at the [tests](Consoleum.PageObjects.Tests) for more inspiration on reusing the driver over multiple tests and assertions using [Shouldly](https://www.nuget.org/packages/Shouldly/).
 
-## .NET Core?
+## Why not xplat?
 
-This package heavily relies on Windows Desktop functions for starting the process, capturing the output on the clipboard using keystrokes and native Win32 invocations to grab that data from the clipboard. You can figure out why it's not plain core.
+This package relies heavily on Windows Desktop functions for starting the process, capturing the output on the clipboard using keystrokes and native Win32 invocations to grab that data from the clipboard. 
+You do the math why it can't be xplat.
