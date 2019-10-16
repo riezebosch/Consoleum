@@ -1,11 +1,6 @@
-using System.Diagnostics;
-using WindowsInput;
-using WindowsInput.Native;
 using Xunit;
 using Shouldly;
-using System.Threading;
 using System;
-using PInvoke;
 
 namespace Consoleum.Tests
 {

@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4.0" />
-    <PackageReference Include="PInvoke.User32" Version="0.5.184" />
+    <PackageReference Include="PInvoke.User32" Version="[0.5.184, 0.6]" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
   </ItemGroup>
   <PropertyGroup>

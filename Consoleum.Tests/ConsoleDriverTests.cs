@@ -1,9 +1,6 @@
 using Xunit;
 using Shouldly;
 using System.Diagnostics;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace Consoleum.Tests
 {

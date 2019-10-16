@@ -1,6 +1,5 @@
 using System;
 using Shouldly;
-using WindowsInput;
 using Xunit;
 
 namespace Consoleum.Tests
