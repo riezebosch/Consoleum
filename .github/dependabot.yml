@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  target-branch: master
+  ignore:
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - "> 16.5.0, < 17"
+  - dependency-name: nsubstitute
+    versions:
+    - "> 4.2.1, < 5"
+  - dependency-name: Shouldly
+    versions:
+    - ">= 4.a, < 5"
+  - dependency-name: xunit.runner.visualstudio
+    versions:
+    - "> 2.4.1, < 3"
