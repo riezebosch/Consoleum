@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageReference Include="InputSimulator" Version="1.0.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="OpenCover" Version="4.7.922" />
+    <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Shouldly" Version="3.0.2" />
     <PackageReference Include="System.Windows.Forms" Version="4.0.0.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
